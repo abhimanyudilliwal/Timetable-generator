@@ -1,0 +1,86 @@
+{% extends 'profile.html' %}
+
+{% block content %}
+<body>
+<style>
+
+
+.sidebar a {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #818181;
+  display: block;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.main {
+  margin-left: 160px; /* Same as the width of the sidenav */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidebar {padding-top: 15px;}
+  .sidebar a {font-size: 18px;}
+}
+
+        .container {
+            position: absolute;
+            left: 300px;
+            top: 70px;
+            margin: 20px;
+            max-width: 70%;
+            padding: 26px;
+        }
+
+        b {
+            color: black;
+            font-size:26px;
+            -webkit-text-stroke: 1px black;
+        }
+
+        /* Full-width input */
+        input[type=text],
+        input[type=password] {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0px;
+            border: 2px solid black;
+        }
+                /* Styling the submit button */
+        .buttn {
+            background-color: black;
+            color: white;
+            padding: 16px 16px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .buttn:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s;
+        }
+        .option{
+         width: 100%;
+            padding: 15px;
+            margin: 15px 0px;
+            border: 2px solid black;
+
+        }
+
+</style>
+
+<h2>Edit Class Data</h2>
+<div class="main">
+    <form method="POST" class="container">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="buttn">Save</button>
+    </form>
+</div>
+</body>
+{% endblock %}

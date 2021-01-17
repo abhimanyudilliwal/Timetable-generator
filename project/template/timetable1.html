@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{% load static %}
+
+    <!-- Bootstrap core CSS-->
+    <link href="{% static '/info/bootstrap/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="{% static '/info/bootstrap/vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+
+    <!-- Page level plugin CSS-->
+    <link href="{% static '/info/bootstrap/vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="{% static '/info/bootstrap/css/sb-admin.css' %}" rel="stylesheet">
+
+    <!-- Latest compiled and minified CSS -->
+
+
+      {% block css %}
+      {% endblock %}
+<style>
+* {box-sizing: border-box}
+body {font-family: Arial, Helvetica, sans-serif;}
+
+.navbar {
+  width: 100%;
+  background-color: #555;
+  overflow: auto;
+}
+
+.navbar a {
+  float: left;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 17px;
+  width: 25%; /* Four links of equal widths */
+  text-align: center;
+}
+
+.navbar a:hover {
+  background-color: #000;
+}
+
+.navbar a.active {
+  background-color: #4CAF50;
+}
+
+@media screen and (max-width: 500px) {
+  .navbar a {
+    float: none;
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+.previous{
+        position: fixed;
+        left: 90%;
+        bottom: 10%;
+
+        text-align: center;
+        }
+</style>
+<body>
+
+<h2>View The First Year TimeTable </h2>
+
+<div class="navbar">
+  <a class="active" href="{% url 'timetable1'  %}">First Year</a>
+  <a href="{% url 'timetable2'  %}">Second Year</a>
+  <a href="{% url 'timetable3'  %}">Third Year</a>
+  <a href="{% url 'timetable4'  %}">Fourth Year</a>
+</div>
+
+      <form method="GET">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="title_contains" placeholder="Program contains..." />
+                    <span class="input-group-append">
+                        <div class="">
+                            <input type="submit">
+                        </div>
+                    </span>
+                </div>
+                <div>
+
+              <table id="myTable">
+  <tr class="header">
+    <th style="width:30%;">id</th>
+    <th style="width:30%;">teacher name</th>
+          <th style="width:30%;">course name</th>
+
+  </tr>
+                        {% for Co in queryset %}
+  <tr>
+    <td> {{ Co.course_id}}</td>
+    <td> {{ Co.teacher}}</td>
+          <td> {{ Co.course}}</td>
+
+ {% endfor %}
+  </tr>
+
+</table>
+
+
+
+
+          </div>
+            </div>
+        </div>
+
+
+      </form>
+<form>
+    <div class="container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 class="text-center">
+                        Timetable
+                    </h2>
+                </div>
+                <div id="no-more-tables">
+                    <table class="col-sm-12 table table-bordered table-striped table-condensed cf">
+                        <thead class="cf">
+                            <tr>
+                                <th>      </th>
+                                <th>9:30 - 10:30</th>
+                                <th>10:30 - 11:30</th>
+                                <th>11:30 - 12:30</th>
+                                <th>Break</th>
+                                <th>1:30 - 2:30</th>
+                                <th>2:30 - 3:30</th>
+                                <th>3:30 - 4:30</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in matrix %}
+                            <tr>
+                                {% for j in i %}
+                                    {% if forloop.counter == 1 %}
+                                    <td><b>{{ j }}</b></td>
+                                    {% else %}
+                                    <td>{{ j }}</td>
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+       </div>
+             <div class="previous">
+             <a class="btn btn-warning" href="/" role="button">Back</a>
+
+             </div>
+
+    </div>
+     </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+{#        <footer class="sticky-footer">#}
+{#          <div class="container my-auto">#}
+{#            <div class="copyright text-center my-auto">#}
+{#              <span>Copyright © Your Website 2018</span>#}
+{#            </div>#}
+{#          </div>#}
+{#        </footer>#}
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="#">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+   <script src="{% static '/info/bootstrap/vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static '/info/bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{% static '/info/bootstrap/vendor/jquery-easing/jquery.easing.min.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static '/info/bootstrap/js/sb-admin.min.js' %}"></script>
+
+   {% block scripts %}
+    {% endblock %}
+</form>
+
+</body>
+</html>

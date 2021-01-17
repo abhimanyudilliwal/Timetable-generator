@@ -1,0 +1,39 @@
+{% extends 'profile.html' %}
+
+{% block content %}
+<div class="card mb-3">
+        <div class="card-header">
+              <i class="fas fa-table"></i>
+            <b>Course</b></div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>Program_id</th>
+                        <th>Course_id</th>
+                        <th>Course_name</th>
+                        <th>   </th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for m in dpt %}
+                    <tr>
+                        <td>{{ m.program }}</td>
+                        <td>{{ m.course_id }}</td>
+                        <td>{{ m.course_name }}</td>
+
+                            <td><a class="btn btn-warning" href="{% url 'EditCo' course_id=m.course_id%}" role="button">Edit</a> </td>
+
+                    </tr>
+                    {% empty %}
+                            <p>admin has no department</p>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+        </div>
+    </div>
+{% endblock %}

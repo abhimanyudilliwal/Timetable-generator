@@ -1,0 +1,36 @@
+{% extends 'profile.html' %}
+
+{% block content %}
+<div class="card mb-3">
+        <div class="card-header">
+              <i class="fas fa-table"></i>
+            <b>Department</b></div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NAME</th>
+                        <th></th>
+                         <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for m in dpt %}
+                    <tr>
+                        <td>{{ m.dept_id }}</td>
+                        <td>{{ m.dept_name }}</td>
+                            <td><a class="btn btn-warning" href="{% url 'EditD' dept_id=m.dept_id %}" role="button">Edit</a> </td>
+                        <td><a class="btn btn-warning" href="{% url 'deleteD' dept_id=m.dept_id %}" role="button">Delete</a> </td>
+                    </tr>
+                    {% empty %}
+                            <p>admin has no department</p>
+                    {% endfor %}
+
+                  </tbody>
+                </table>
+              </div>
+        </div>
+    </div>
+{% endblock %}
